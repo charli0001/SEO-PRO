@@ -1,0 +1,12 @@
+function analyzeCompetitor(url) {
+    // Simulate competitor analysis
+    return {
+        domainAuthority: Math.floor(Math.random() * 100),
+        backlinks: Math.floor(Math.random() * 10000),
+        topKeywords: Array(5).fill(0).map(() => ({
+            keyword: `keyword-${Math.random().toString(36).substring(7)}`,
+            position: Math.floor(Math.random() * 100)
+        })),
+        rankingHistory: Array(12).fill(0).map(() => Math.floor(Math.random() * 100))
+    };
+}
