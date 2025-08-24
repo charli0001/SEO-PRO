@@ -1,0 +1,11 @@
+function initMobileMenu() {
+    const menuButton = document.createElement('button');
+    menuButton.classList.add('mobile-menu-btn');
+    menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+    
+    menuButton.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('active');
+    });
+    
+    document.querySelector('.topbar').prepend(menuButton);
+}
