@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Master Pro | Premium SEO Analytics Suite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-dark: #0d1440;
+            --secondary: #ff6f00;
+            --accent: #29b6f6;
+            --success: #00c853;
+            --warning: #ffab00;
+            --danger: #ff1744;
+            --light: #f8f9fa;
+            --dark: #121212;
+            --gray: #9e9e9e;
+            --gray-light: #f5f5f5;
+            --bg-light: #ffffff;
+            --text-light: #212529;
+            --bg-dark: #1e1e1e;
+            --text-dark: #f5f5f5;
+            --card-light: #ffffff;
+            --card-dark: #252525;
+            --border-light: #e0e0e0;
+            --border-dark: #424242;
+            --sidebar-light: #f5f5f7;
+            --sidebar-dark: #1a1a1a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.2);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            --gradient-premium: linear-gradient(135deg, var(--secondary), #ff9100);
+        }
+
+        .dark-mode {
+            --bg-primary: var(--bg-dark);
+            --text-primary: var(--text-dark);
+            --card-bg: var(--card-dark);
+            --border-color: var(--border-dark);
+            --sidebar-bg: var(--sidebar-dark);
+            --shadow: var(--shadow-dark);
+        }
+
+        .light-mode {
+            --bg-primary: var(--bg-light);
+            --text-primary: var(--text-light);
+            --card-bg: var(--card-light);
+            --border-color: var(--border-light);
+            --sidebar-bg: var(--sidebar-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        /* Premium Header Banner */
+        .premium-banner {
+            background: var(--gradient-premium);
+            color: white;
+            padding: 0.5rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .premium-banner .close-banner {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            padding: 1.5rem;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-header .logo i {
+            margin-right: 10px;
+            background: var(--gradient-primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(26, 35, 126, 0.1);
+        }
+
+        .nav-item.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(26, 35, 126, 0.2);
+        }
+
+        .nav-item i {
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-item .premium-tag {
+            background: var(--gradient-premium);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .sidebar-footer {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Topbar */
+        .topbar {
+            background-color: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 90;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-primary);
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            width: 300px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar i {
+            color: var(--gray);
+            margin-right: 0.8rem;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            color: var(--text-primary);
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 0.8rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.keyword {
+            background-color: rgba(26, 35, 126, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-icon.rank {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+        }
+
+        .stat-icon.backlink {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .stat-icon.content {
+            background-color: rgba(255, 23, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-title {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-trend.up {
+            color: var(--success);
+        }
+
+        .stat-trend.down {
+            color: var(--danger);
+        }
+
+        .stat-trend i {
+            margin-right: 0.3rem;
+        }
+
+        /* Charts */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            font-weight: 600;
+        }
+
+        .chart-content {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Recent Activity */
+        .activity-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.keyword {
+            background-color: rgba(26, 35, 126, 0.1);
+            color: var(--primary);
+        }
+
+        .activity-icon.audit {
+            background-color: rgba(0, 200, 83, 0.1);
+            color: var(--success);
+        }
+
+        .activity-icon.backlink {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .activity-details {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .activity-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .activity-time {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Tools Section */
+        .tool-section {
+            display: none;
+        }
+
+        .tool-section.active {
+            display: block;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-description {
+            color: var(--gray);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.15);
+        }
+
+        select.form-control {
+            appearance: auto;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(26, 35, 126, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 35, 126, 0.3);
+        }
+
+        .btn-premium {
+            background: var(--gradient-premium);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 111, 0, 0.2);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 111, 0, 0.3);
+        }
+
+        /* Results */
+        .results-container {
+            margin-top: 2.5rem;
+            display: none;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+            width: 200px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-title {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Sortable Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .data-table th:hover {
+            background-color: rgba(26, 35, 126, 0.1);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(26, 35, 126, 0.05);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-premium);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 111, 0, 0.3);
+            z-index: 1000;
+            font-size: 1.5rem;
+        }
+
+        .ai-panel {
+            position: fixed;
+            bottom: 7rem;
+            right: 2rem;
+            width: 350px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            max-height: 500px;
+        }
+
+        .ai-panel-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-panel-body {
+            padding: 1rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .ai-message {
+            background-color: rgba(26, 35, 126, 0.1);
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .ai-panel-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .ai-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 240px;
+            }
+            
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1rem;
+                display: none;
+            }
+            
+            .sidebar.active {
+                display: flex;
+            }
+            
+            .sidebar-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-section {
+                flex-basis: 100%;
+            }
+            
+            .nav-item {
+                display: inline-flex;
+                margin-bottom: 0.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-primary);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+
+            .ai-panel {
+                width: 300px;
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .topbar {
+                padding: 1rem;
+            }
+            
+            .search-bar {
+                width: 150px;
+            }
+            
+            .user-info {
+                display: none;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+
+            .ai-panel {
+                width: calc(100% - 2rem);
+                right: 1rem;
+                left: 1rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Score Ring */
+        .score-ring {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+
+        .ring-circle {
+            transform: rotate(-90deg);
+        }
+
+        .ring-background {
+            fill: none;
+            stroke: #e6e6e6;
+            stroke-width: 8;
+        }
+
+        .ring-progress {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .score-label {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: var(--gray);
+        }
+
+        /* Tool Specific Styles */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-feature {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-feature-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tool-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .tool-feature-title {
+            font-weight: 600;
+        }
+
+        /* Advanced Data Visualization */
+        .data-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .viz-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .viz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .viz-title {
+            font-weight: 600;
+        }
+
+        .viz-content {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            background: var(--gradient-premium);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .premium-badge i {
+            margin-right: 0.3rem;
+        }
+
+        /* Integration Cards */
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .integration-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .integration-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .integration-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .integration-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .integration-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* New Tool Styles */
+        .tool-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .tool-tab {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .tool-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .tool-results {
+            margin-top: 2rem;
+        }
+
+        .insight-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .insight-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .insight-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .insight-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-content {
+            color: var(--gray);
+        }
+
+        .insight-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Project Management */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-weight: 600;
+        }
+
+        .project-progress {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .project-progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(26, 35, 126, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification Panel */
+        .notification-panel {
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 350px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .notification-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-list {
+            list-style: none;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .notification-details {
+            flex-grow: 1;
+        }
+
+        .notification-message {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-time {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="premium-banner">
+        <span>🚀 Welcome to SEO Master Pro Premium! Unlock all advanced features with our premium plan.</span>
+        <button class="close-banner">&times;</button>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-search"></i>
+                    <span>SEO Master Pro</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Dashboard</div>
+                    <a href="#" class="nav-item active" data-target="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Overview</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Core SEO Tools</div>
+                    <a href="#" class="nav-item" data-target="keyword-analysis">
+                        <i class="fas fa-key"></i>
+                        <span>Keyword Analysis</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="competitor-analyzer">
+                        <i class="fas fa-users"></i>
+                        <span>Competitor Analyzer</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="keyword-research">
+                        <i class="fas fa-search"></i>
+                        <span>Keyword Research</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="backlink-analyzer">
+                        <i class="fas fa-link"></i>
+                        <span>Backlink Analyzer</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="seo-audit">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>SEO Audit</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Advanced Tools</div>
+                    <a href="#" class="nav-item" data-target="onpage-audit">
+                        <i class="fas fa-file-alt"></i>
+                        <span>On-Page Audit</span>
+                        <span class="premium-tag">Pro</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="content-optimizer">
+                        <i class="fas fa-edit"></i>
+                        <span>Content Optimizer</span>
+                        <span class="premium-tag">Pro</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="site-speed">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Site Speed</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="rank-tracker">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Rank Tracker</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="serp-analyzer">
+                        <i class="fas fa-search-plus"></i>
+                        <span>SERP Analyzer</span>
+                        <span class="premium-tag">Pro</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Premium Tools</div>
+                    <a href="#" class="nav-item" data-target="technical-seo">
+                        <i class="fas fa-cogs"></i>
+                        <span>Technical SEO</span>
+                        <span class="premium-tag">Premium</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="content-audit">
+                        <i class="fas fa-file-contract"></i>
+                        <span>Content Audit</span>
+                        <span class="premium-tag">Premium</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="ai-content-writer">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Content Writer</span>
+                        <span class="premium-tag">Premium</span>
+                    </a>
+                    <a href="#" class="nav-item" data-target="seo-project-management">
+                        <i class="fas fa-tasks"></i>
+                        <span>SEO Project Management</span>
+                        <span class="premium-tag">Premium</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Integrations</div>
+                    <a href="#" class="nav-item">
+                        <i class="fab fa-google"></i>
+                        <span>Google Analytics</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fab fa-google-drive"></i>
+                        <span>Google Search Console</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-database"></i>
+                        <span>CRM Systems</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fab fa-wordpress"></i>
+                        <span>WordPress</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fab fa-shopify"></i>
+                        <span>Shopify</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Resources</div>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-book"></i>
+                        <span>Knowledge Base</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-blog"></i>
+                        <span>Blog</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-video"></i>
+                        <span>Tutorials</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="nav-item" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <div class="topbar">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search reports, keywords...">
+                </div>
+                
+                <div class="topbar-actions">
+                    <div class="notification-bell" id="notificationBell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    
+                    <div class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-info">
+                            <div class="user-name">John Doe</div>
+                            <div class="user-role">
+                                <span class="premium-badge">
+                                    <i class="fas fa-crown"></i> Premium Plan
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Panel -->
+            <div class="notification-panel" id="notificationPanel">
+                <div class="notification-header">
+                    <h3>Notifications</h3>
+                    <button class="close-notifications">&times;</button>
+                </div>
+                <ul class="notification-list">
+                    <li class="notification-item">
+                        <div class="notification-icon" style="background-color: rgba(0, 200, 83, 0.1); color: var(--success);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="notification-details">
+                            <div class="notification-message">SEO audit completed for myblog.com</div>
+                            <div class="notification-time">10 minutes ago</div>
+                        </div>
+                    </li>
+                    <li class="notification-item">
+                        <div class="notification-icon" style="background-color: rgba(255, 171, 0, 0.1); color: var(--warning);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="notification-details">
+                            <div class="notification-message">Website speed decreased by 15%</div>
+                            <div class="notification-time">2 hours ago</div>
+                        </div>
+                    </li>
+                    <li class="notification-item">
+                        <div class="notification-icon" style="background-color: rgba(26, 35, 126, 0.1); color: var(--primary);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="notification-details">
+                            <div class="notification-message">5 keywords improved their ranking</div>
+                            <div class="notification-time">Yesterday</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Dashboard Section -->
+                <section class="dashboard" id="dashboard">
+                    <div class="section-title">
+                        <h2>Dashboard Overview</h2>
+                        <div class="date-filter">
+                            <select class="form-control">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon keyword">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <div class="stat-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">128</div>
+                            <div class="stat-title">Keywords Tracked</div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i> 12% from last week
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon rank">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="stat-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">42</div>
+                            <div class="stat-title">Top 10 Rankings</div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i> 5 new rankings
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon backlink">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div class="stat-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">56</div>
+                            <div class="stat-title">Backlinks Found</div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i> 8 new backlinks
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon content">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="stat-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="stat-value">24</div>
+                            <div class="stat-title">Content Analyses</div>
+                            <div class="stat-trend down">
+                                <i class="fas fa-arrow-down"></i> 2% from last week
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">Keyword Ranking Trends</div>
+                                <div class="chart-actions">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chart-content">
+                                <canvas id="rankingChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title">SEO Health Score</div>
+                            </div>
+                            <div class="chart-content">
+                                <div class="score-ring">
+                                    <svg class="ring-circle" width="120" height="120" viewBox="0 0 120 120">
+                                        <circle class="ring-background" cx="60" cy="60" r="54" />
+                                        <circle class="ring-progress" cx="60" cy="60" r="54" stroke-dasharray="339.3" stroke-dashoffset="67.86" />
+                                    </svg>
+                                    <div class="score-value">80%</div>
+                                </div>
+                                <div class="score-label">Overall SEO Score</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="integration-grid">
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="integration-title">Google Analytics</div>
+                            <div class="integration-description">Connected & Synced</div>
+                        </div>
+                        
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fab fa-google-drive"></i>
+                            </div>
+                            <div class="integration-title">Search Console</div>
+                            <div class="integration-description">Connected & Synced</div>
+                        </div>
+                        
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="integration-title">CRM Integration</div>
+                            <div class="integration-description">Available</div>
+                        </div>
+
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fab fa-wordpress"></i>
+                            </div>
+                            <div class="integration-title">WordPress</div>
+                            <div class="integration-description">Connected</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="chart-header">
+                            <div class="chart-title">Recent Activity</div>
+                            <div class="chart-actions">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-history"></i> View All
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <div class="activity-icon keyword">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-name">Keyword Analysis: "Blogspot SEO"</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </li>
+                            
+                            <li class="activity-item">
+                                <div class="activity-icon audit">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-name">SEO Audit: myblog.blogspot.com</div>
+                                    <div class="activity-time">Yesterday</div>
+                                </div>
+                            </li>
+                            
+                            <li class="activity-item">
+                                <div class="activity-icon backlink">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <div class="activity-name">Backlink Analysis</div>
+                                    <div class="activity-time">3 days ago</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Keyword Analysis Tool Section -->
+                <section id="keyword-analysis" class="tool-section">
+                    <div class="section-title">
+                        <h2>Keyword Analysis Tool</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-history"></i> History
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3 class="tool-title">Analyze Keyword Performance</h3>
+                            <p class="tool-description">Get detailed insights into keyword performance metrics</p>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="keyword-input">Enter Keyword</label>
+                                <input type="text" id="keyword-input" class="form-control" placeholder="e.g., best seo practices">
+                            </div>
+                            <div class="form-group">
+                                <label for="country-select">Select Country</label>
+                                <select id="country-select" class="form-control">
+                                    <option value="us">United States</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="ca">Canada</option>
+                                    <option value="au">Australia</option>
+                                    <option value="de">Germany</option>
+                                    <option value="fr">France</option>
+                                    <option value="in">India</option>
+                                    <option value="br">Brazil</option>
+                                    <option value="jp">Japan</option>
+                                    <option value="cn">China</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="keyword-language">Language</label>
+                                <select id="keyword-language" class="form-control">
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="search-engine">Search Engine</label>
+                                <select id="search-engine" class="form-control">
+                                    <option value="google">Google</option>
+                                    <option value="bing">Bing</option>
+                                    <option value="yahoo">Yahoo</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="analyze-keyword">
+                            <i class="fas fa-search"></i> Analyze Keyword
+                        </button>
+                        
+                        <div class="results-container" id="keyword-results">
+                            <div class="result-header">
+                                <h3>Keyword Analysis Results</h3>
+                                <div class="result-actions">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-download"></i> CSV
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-file-pdf"></i> PDF
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="kpi-grid">
+                                <div class="kpi-card">
+                                    <div class="kpi-value">5,400</div>
+                                    <div class="kpi-title">Monthly Searches</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">$2.35</div>
+                                    <div class="kpi-title">Avg. CPC</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">High</div>
+                                    <div class="kpi-title">Competition</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">78%</div>
+                                    <div class="kpi-title">Difficulty</div>
+                                </div>
+                            </div>
+                            
+                            <div class="data-visualization">
+                                <div class="viz-card">
+                                    <div class="viz-header">
+                                        <div class="viz-title">Search Volume Trend</div>
+                                    </div>
+                                    <div class="viz-content">
+                                        <canvas id="volumeChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="viz-card">
+                                    <div class="viz-header">
+                                        <div class="viz-title">Competition Analysis</div>
+                                    </div>
+                                    <div class="viz-content">
+                                        <canvas id="competitionChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span>Search Volume:</span>
+                                <span>5,400/month</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Competition:</span>
+                                <span>High</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Difficulty:</span>
+                                <span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 78%"></div>
+                                    </div>
+                                    78%
+                                </span>
+                            </div>
+                            <div class="result-item">
+                                <span>CPC:</span>
+                                <span>$2.35</span>
+                            </div>
+                            
+                            <h4 style="margin-top: 20px;">Related Keywords</h4>
+                            
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Keyword</th>
+                                            <th>Search Volume</th>
+                                            <th>Competition</th>
+                                            <th>Difficulty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>seo best practices</td>
+                                            <td>3,600</td>
+                                            <td>Medium</td>
+                                            <td>65%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>search engine optimization</td>
+                                            <td>8,100</td>
+                                            <td>High</td>
+                                            <td>82%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>on-page seo</td>
+                                            <td>2,900</td>
+                                            <td>Medium</td>
+                                            <td>58%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI Content Writer Tool Section -->
+                <section id="ai-content-writer" class="tool-section">
+                    <div class="section-title">
+                        <h2>AI Content Writer</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-premium">
+                                <i class="fas fa-crown"></i> Premium Feature
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3 class="tool-title">Generate SEO-Optimized Content</h3>
+                            <p class="tool-description">Use AI to create high-quality, SEO-friendly content for your website</p>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="content-topic">Content Topic</label>
+                                <input type="text" id="content-topic" class="form-control" placeholder="e.g., Best SEO Practices for 2023">
+                            </div>
+                            <div class="form-group">
+                                <label for="content-type">Content Type</label>
+                                <select id="content-type" class="form-control">
+                                    <option value="blog">Blog Post</option>
+                                    <option value="article">Article</option>
+                                    <option value="product">Product Description</option>
+                                    <option value="landing">Landing Page</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="content-tone">Tone of Voice</label>
+                                <select id="content-tone" class="form-control">
+                                    <option value="professional">Professional</option>
+                                    <option value="casual">Casual</option>
+                                    <option value="friendly">Friendly</option>
+                                    <option value="authoritative">Authoritative</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="content-length">Content Length</label>
+                                <select id="content-length" class="form-control">
+                                    <option value="short">Short (500 words)</option>
+                                    <option value="medium">Medium (1000 words)</option>
+                                    <option value="long">Long (2000+ words)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="target-keywords">Target Keywords (comma separated)</label>
+                            <input type="text" id="target-keywords" class="form-control" placeholder="e.g., seo best practices, search engine optimization">
+                        </div>
+                        
+                        <button class="btn btn-premium" id="generate-content">
+                            <i class="fas fa-robot"></i> Generate Content
+                        </button>
+                        
+                        <div class="results-container" id="content-results">
+                            <div class="result-header">
+                                <h3>AI Generated Content</h3>
+                                <div class="result-actions">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-card">
+                                <div class="insight-header">
+                                    <div class="insight-icon" style="background-color: rgba(26, 35, 126, 0.1); color: var(--primary);">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="insight-title">Content Preview</div>
+                                </div>
+                                <div class="insight-content">
+                                    <p>Here is the AI-generated content based on your requirements. This content is optimized for SEO with proper keyword placement, heading structure, and readability.</p>
+                                    <div style="background-color: var(--bg-primary); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                                        <h3>Best SEO Practices for 2023</h3>
+                                        <p>Search Engine Optimization (SEO) continues to evolve each year, and 2023 is no exception. With search engines becoming increasingly sophisticated, it's crucial to stay updated with the latest SEO practices to ensure your website ranks well and attracts organic traffic.</p>
+                                        <p>One of the most important SEO best practices for 2023 is focusing on user experience. Google's Core Web Vitals now play a significant role in ranking algorithms, making page experience more critical than ever. Ensure your website loads quickly, is mobile-friendly, and provides a seamless browsing experience.</p>
+                                        <p>Content quality remains king in the SEO world. Create comprehensive, authoritative content that thoroughly addresses user queries. Google's helpful content update rewards content that provides genuine value to readers rather than content created primarily for ranking purposes.</p>
+                                    </div>
+                                </div>
+                                <div class="insight-actions">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> Edit Content
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-chart-bar"></i> Analyze SEO Score
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="kpi-grid">
+                                <div class="kpi-card">
+                                    <div class="kpi-value">92%</div>
+                                    <div class="kpi-title">SEO Score</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">4</div>
+                                    <div class="kpi-title">Keywords Included</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">Good</div>
+                                    <div class="kpi-title">Readability</div>
+                                </div>
+                                <div class="kpi-card">
+                                    <div class="kpi-value">12</div>
+                                    <div class="kpi-title">Headings</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEO Project Management Tool Section -->
+                <section id="seo-project-management" class="tool-section">
+                    <div class="section-title">
+                        <h2>SEO Project Management</h2>
+                        <div class="section-actions">
+                            <button class="btn btn-premium">
+                                <i class="fas fa-crown"></i> Premium Feature
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <h3 class="tool-title">Manage Your SEO Projects</h3>
+                            <p class="tool-description">Organize, track, and collaborate on SEO projects with your team</p>
+                        </div>
+                        
+                        <div class="tool-tabs">
+                            <div class="tool-tab active" data-tab="projects">Projects</div>
+                            <div class="tool-tab" data-tab="tasks">Tasks</div>
+                            <div class="tool-tab" data-tab="team">Team</div>
+                            <div class="tool-tab" data-tab="reports">Reports</div>
+                        </div>
+                        
+                        <div class="project-grid">
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <div class="project-title">Website Redesign SEO</div>
+                                    <div class="project-status" style="color: var(--success);">Active</div>
+                                </div>
+                                <p style="color: var(--gray); margin-bottom: 1rem;">SEO strategy implementation for website redesign</p>
+                                <div class="project-progress">
+                                    <div class="project-progress-bar" style="width: 65%"></div>
+                                </div>
+                                <div class="project-meta">
+                                    <span>65% Complete</span>
+                                    <span>Due: Aug 30, 2023</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <div class="project-title">Content Strategy</div>
+                                    <div class="project-status" style="color: var(--warning);">Planning</div>
+                                </div>
+                                <p style="color: var(--gray); margin-bottom: 1rem;">Develop content strategy for Q4 2023</p>
+                                <div class="project-progress">
+                                    <div class="project-progress-bar" style="width: 25%"></div>
+                                </div>
+                                <div class="project-meta">
+                                    <span>25% Complete</span>
+                                    <span>Due: Oct 15, 2023</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <div class="project-title">Technical SEO Audit</div>
+                                    <div class="project-status" style="color: var(--success);">Active</div>
+                                </div>
+                                <p style="color: var(--gray); margin-bottom: 1rem;">Comprehensive technical SEO audit</p>
+                                <div class="project-progress">
+                                    <div class="project-progress-bar" style="width: 80%"></div>
+                                </div>
+                                <div class="project-meta">
+                                    <span>80% Complete</span>
+                                    <span>Due: Sep 5, 2023</span>
+                                </div>
+                            </div>
+                            
+                            <div class="project-card">
+                                <div class="project-header">
+                                    <div class="project-title">Backlink Campaign</div>
+                                    <div class="project-status" style="color: var(--danger);">On Hold</div>
+                                </div>
+                                <p style="color: var(--gray); margin-bottom: 1rem;">Q3 backlink outreach campaign</p>
+                                <div class="project-progress">
+                                    <div class="project-progress-bar" style="width: 40%"></div>
+                                </div>
+                                <div class="project-meta">
+                                    <span>40% Complete</span>
+                                    <span>Due: Sep 20, 2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i> New Project
+                        </button>
+                        
+                        <div class="results-container" id="project-results">
+                            <div class="result-header">
+                                <h3>Project Details</h3>
+                                <div class="result-actions">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Task</th>
+                                            <th>Assigned To</th>
+                                            <th>Priority</th>
+                                            <th>Status</th>
+                                            <th>Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Keyword Research</td>
+                                            <td>John Doe</td>
+                                            <td>High</td>
+                                            <td>Completed</td>
+                                            <td>Aug 15, 2023</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Content Optimization</td>
+                                            <td>Sarah Smith</td>
+                                            <td>Medium</td>
+                                            <td>In Progress</td>
+                                            <td>Aug 25, 2023</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Technical Implementation</td>
+                                            <td>Mike Johnson</td>
+                                            <td>High</td>
+                                            <td>Not Started</td>
+                                            <td>Sep 5, 2023</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Additional tool sections would go here -->
+                <!-- Competitor Analyzer, Keyword Research, Backlink Analyzer, SEO Audit, On-Page Audit, Content Optimizer, Site Speed, Rank Tracker, SERP Analyzer, Technical SEO, Content Audit -->
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant" id="aiAssistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-panel" id="aiPanel">
+        <div class="ai-panel-header">
+            <h3>AI SEO Assistant</h3>
+            <button class="close-ai">&times;</button>
+        </div>
+        <div class="ai-panel-body">
+            <div class="ai-message">
+                Hi there! I'm your AI SEO assistant. How can I help you with your SEO strategy today?
+            </div>
+        </div>
+        <div class="ai-panel-footer">
+            <input type="text" class="ai-input" placeholder="Ask me anything about SEO...">
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        const sidebar = document.getElementById('sidebar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.tool-section, .dashboard');
+        const analyzeKeywordBtn = document.getElementById('analyze-keyword');
+        const keywordResults = document.getElementById('keyword-results');
+        const generateContentBtn = document.getElementById('generate-content');
+        const contentResults = document.getElementById('content-results');
+        const aiAssistant = document.getElementById('aiAssistant');
+        const aiPanel = document.getElementById('aiPanel');
+        const closeAi = document.querySelector('.close-ai');
+        const premiumBanner = document.querySelector('.premium-banner');
+        const closeBanner = document.querySelector('.close-banner');
+        const toolTabs = document.querySelectorAll('.tool-tab');
+        const notificationBell = document.getElementById('notificationBell');
+        const notificationPanel = document.getElementById('notificationPanel');
+        const closeNotifications = document.querySelector('.close-notifications');
+
+        // Theme Toggle Functionality
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+            
+            // Update charts when theme changes
+            updateCharts();
+        });
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = item.getAttribute('data-target');
+                
+                // Update active nav item
+                navItems.forEach(navItem => navItem.classList.remove('active'));
+                item.classList.add('active');
+                
+                // Show selected section
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                    if (section.id === target) {
+                        section.style.display = 'block';
+                    }
+                });
+                
+                // Close sidebar on mobile after selection
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+        // Tool Functions
+        analyzeKeywordBtn.addEventListener('click', () => {
+            const keyword = document.getElementById('keyword-input').value || 'best seo practices';
+            const country = document.getElementById('country-select').value;
+            
+            // Simulate loading
+            analyzeKeywordBtn.innerHTML = '<div class="loading"></div> Analyzing...';
+            analyzeKeywordBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show results
+                keywordResults.style.display = 'block';
+                analyzeKeywordBtn.innerHTML = '<i class="fas fa-search"></i> Analyze Keyword';
+                analyzeKeywordBtn.disabled = false;
+                
+                // Update results based on country (simulated)
+                const volumeMap = {
+                    'us': '5,400',
+                    'uk': '3,200',
+                    'ca': '1,800',
+                    'au': '1,500',
+                    'de': '2,100',
+                    'fr': '1,900',
+                    'in': '4,300',
+                    'br': '2,800',
+                    'jp': '1,200',
+                    'cn': '900'
+                };
+                
+                const volumeElement = document.querySelector('#keyword-results .result-item:first-child span:last-child');
+                volumeElement.textContent = `${volumeMap[country] || '5,400'}/month`;
+                
+                // Update charts
+                updateCharts();
+                
+                // Animate results
+                keywordResults.classList.add('fade-in');
+            }, 1500);
+        });
+
+        // Generate Content Function
+        generateContentBtn.addEventListener('click', () => {
+            const topic = document.getElementById('content-topic').value || 'Best SEO Practices';
+            
+            // Simulate loading
+            generateContentBtn.innerHTML = '<div class="loading"></div> Generating...';
+            generateContentBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Show results
+                contentResults.style.display = 'block';
+                generateContentBtn.innerHTML = '<i class="fas fa-robot"></i> Generate Content';
+                generateContentBtn.disabled = false;
+                
+                // Update content based on topic
+                const contentPreview = document.querySelector('.insight-content div');
+                contentPreview.querySelector('h3').textContent = topic;
+                
+                // Animate results
+                contentResults.classList.add('fade-in');
+            }, 2000);
+        });
+
+        // AI Assistant Toggle
+        aiAssistant.addEventListener('click', () => {
+            aiPanel.style.display = 'flex';
+        });
+
+        closeAi.addEventListener('click', () => {
+            aiPanel.style.display = 'none';
+        });
+
+        // Close Premium Banner
+        closeBanner.addEventListener('click', () => {
+            premiumBanner.style.display = 'none';
+        });
+
+        // Tool Tabs
+        toolTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                toolTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Notification Panel Toggle
+        notificationBell.addEventListener('click', () => {
+            notificationPanel.style.display = notificationPanel.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        closeNotifications.addEventListener('click', () => {
+            notificationPanel.style.display = 'none';
+        });
+
+        // Sortable Tables
+        document.querySelectorAll('.data-table th').forEach(header => {
+            header.addEventListener('click', () => {
+                const table = header.parentElement.parentElement.parentElement;
+                const headerIndex = Array.prototype.indexOf.call(header.parentElement.children, header);
+                const isAscending = header.classList.contains('asc');
+                
+                // Reset all headers
+                table.querySelectorAll('th').forEach(th => {
+                    th.classList.remove('asc', 'desc');
+                });
+                
+                // Set new sort direction
+                header.classList.toggle('asc', !isAscending);
+                header.classList.toggle('desc', isAscending);
+                
+                // Sort table
+                const tbody = table.querySelector('tbody');
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+                
+                rows.sort((a, b) => {
+                    const aValue = a.children[headerIndex].textContent;
+                    const bValue = b.children[headerIndex].textContent;
+                    
+                    // Check if values are numeric
+                    const aNum = parseFloat(aValue.replace(/[^0-9.]/g, ''));
+                    const bNum = parseFloat(bValue.replace(/[^0-9.]/g, ''));
+                    
+                    if (!isNaN(aNum) && !isNaN(bNum)) {
+                        return isAscending ? aNum - bNum : bNum - aNum;
+                    } else {
+                        return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                    }
+                });
+                
+                // Remove existing rows
+                while (tbody.firstChild) {
+                    tbody.removeChild(tbody.firstChild);
+                }
+                
+                // Add sorted rows
+                rows.forEach(row => tbody.appendChild(row));
+            });
+        });
+
+        // Initialize dashboard as active
+        document.getElementById('dashboard').style.display = 'block';
+
+        // Chart initialization
+        let rankingChart, volumeChart, competitionChart;
+        
+        function initCharts() {
+            const isDarkMode = body.classList.contains('dark-mode');
+            const textColor = isDarkMode ? '#f5f5f5' : '#212529';
+            const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            
+            // Ranking Trend Chart
+            const rankingCtx = document.getElementById('rankingChart').getContext('2d');
+            rankingChart = new Chart(rankingCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Keyword Ranking',
+                        data: [18, 15, 12, 10, 8, 5],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            reverse: true,
+                            beginAtZero: true,
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: textColor
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Volume Trend Chart
+            const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+            volumeChart = new Chart(volumeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Search Volume',
+                        data: [4800, 5200, 5000, 5400, 5600, 5800],
+                        backgroundColor: 'rgba(26, 35, 126, 0.7)',
+                        borderColor: '#1a237e',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: gridColor
+                            },
+                            ticks: {
+                                color: textColor
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: textColor
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Competition Chart
+            const competitionCtx = document.getElementById('competitionChart').getContext('2d');
+            competitionChart = new Chart(competitionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['High', 'Medium', 'Low'],
+                    datasets: [{
+                        data: [45, 30, 25],
+                        backgroundColor: [
+                            'rgba(255, 23, 68, 0.7)',
+                            'rgba(255, 171, 0, 0.7)',
+                            'rgba(0, 200, 83, 0.7)'
+                        ],
+                        borderColor: [
+                            '#ff1744',
+                            '#ffab00',
+                            '#00c853'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: textColor
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateCharts() {
+            if (rankingChart && volumeChart && competitionChart) {
+                rankingChart.destroy();
+                volumeChart.destroy();
+                competitionChart.destroy();
+            }
+            initCharts();
+        }
+        
+        // Initialize charts on page load
+        window.addEventListener('load', initCharts);
+    </script>
+</body>
+</html>
