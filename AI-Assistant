@@ -1,0 +1,31 @@
+function initAIAssistant() {
+    const aiButton = document.getElementById('ai-assistant-btn');
+    const aiPanel = document.getElementById('ai-panel');
+    
+    aiButton.addEventListener('click', () => {
+        aiPanel.style.display = 'flex';
+    });
+    
+    // Handle AI queries
+    document.querySelector('.ai-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const query = e.target.value;
+            // Simulate AI response
+            const response = generateAIResponse(query);
+            addAIMessage(response, false);
+            e.target.value = '';
+        }
+    });
+}
+
+function generateAIResponse(query) {
+    // Simple response simulation
+    const responses = [
+        "Based on your website analysis, I recommend focusing on technical SEO improvements.",
+        "Your content strategy is good, but you could benefit from more long-form content.",
+        "I've detected some issues with your meta descriptions that need fixing.",
+        "Your backlink profile is strong, but you should diversify your anchor text more."
+    ];
+    
+    return responses[Math.floor(Math.random() * responses.length)];
+}
